@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="loanApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MyBizCredit Application</title>
+    <!-- jQuery -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/prequalify.js"></script>
+    <!-- Bootstrap -->
+    <link href="css/login-style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
+    <link href="css/style.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" type="text/css" href="css/application-style.css" />
+</head>
+<body ng-controller="PrequalifyController">
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="navigation">
+				<div class="container-fluid">					
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse.collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<div class="navbar-left">
+							<!-- <a href="index.html"><h1>My<span>Biz</span>Credit</h1></a> -->
+							<a href="index.html"><img src="images/logo3.png" class="img-responsive" width="175px"></a>
+						</div>
+					</div>
+					
+					<div class="navbar-collapse collapse">							
+						<div class="menu">
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation"><a href="index.html" >Home</a></li>
+                                <!-- <li role="presentation"><a href="about.html">About Us</a></li> -->
+                                <!-- <li><a href="learnAboutCredit.html">Learn About Credit</a></li> -->
+								<li class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" href="learnAboutCredit.html" >Learn About Credit
+									<span class="caret"></span></a>
+									<ul class="dropdown-menu">
+									<li><a href="learnAboutCredit.html">Learn About Credit</a></li>
+									<li class="divider"></li>
+									<li><a href="startup.html">Startup Financing</a></li>
+									<li><a href="financingExisting.html">Financing for Existing Businesses</a></li>
+									<li><a href="specialPurposeFinancing.html">Special Purpose Financing</a></li>
+									</ul>
+								</li>
+								<li><a href="buildBizCredit.html">Build Business Credit</a></li>
+								<li><a href="loanDenial.html">Overcome Loan Denial</a></li>
+								<li><a href="" class="active">Find the Right Credit</a></li>
+								<!-- <li role="presentation"><a href="services.html">Services</a></li> -->
+								<li role="presentation"><a href="contact.html">Contact</a></li>
+								<li role="presentation"><a href="apply.html">Apply</a></li>						
+							</ul>
+						</div>
+					</div>						
+				</div>
+			</div>	
+		</nav>	
+    </header>
+    <section id="main-slider" class="no-margin">
+        <div class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active" style="background-image: url('images/loan-app-background.jpg');">
+                    <div class="container-fluid">
+                        <div class="row slide-margin">
+                            <div class="col-md-4 col-md-offset-2">
+                                <div class="carousel-content">
+                                    <h2 class="animation animated-item-1 textShadow">Lorem <span>Ipsum</span></h2>
+                                    <p class="animation animated-item-2 textShadow">Accusantium doloremque laudantium totam rem aperiam, eaque ipsa...</p>
+                                    <a class="btn-slide btn-lg animation animated-item-3 login" style="cursor: pointer;">Sign In</a>&nbsp;&nbsp;&nbsp;
+                                    <a class="btn-slide btn-lg animation animated-item-3 register" style="cursor: pointer;" onclick="document.getElementById('register').style.display='block'">Register</a>
+                                </div>
+                            </div>
+                            <div class="col-md-5 col-md-offset-1">
+                                <div class="row" style="margin-top: 80px;">
+                                    <div class="col-md-12">
+                                        <div class="hi-icon-wrap hi-icon-effect wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                            <h2>
+                                                <span class="fa-stack ">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-edit fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                                <span style="color: #fff; font-size: 0.5em;" class="textShadow">Prequalify</span>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="hi-icon-wrap hi-icon-effect wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                            <h2>
+                                                <span class="fa-stack ">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-search fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                                <span style="color: #fff; font-size: 0.5em;" class="textShadow">Find the Right Lender</span>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="hi-icon-wrap hi-icon-effect wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="900ms">
+                                            <h2>
+                                                <span class="fa-stack ">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-handshake-o fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                                <span style="color: #fff; font-size: 0.5em;" class="textShadow">Finalize A Verified Application</span>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="hi-icon-wrap hi-icon-effect wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="1200ms">
+                                            <h2>
+                                                <span class="fa-stack ">
+                                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                                    <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+                                                </span>
+                                                <span style="color: #fff; font-size: 0.5em;" class="textShadow">Get Approved and Fund Your Loan</span>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div id="login" class="modal">
+
+            <form class="modal-content animate">
+                <div class="imgcontainer">
+                    <span class="close">&times;</span>
+                </div>
+
+                <div class="containers">
+                    <input type="text" placeholder="Enter Username" name="uname" required>
+
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+
+                    
+                    <div class="checkbox">
+                        <label style="color: black;"><input class="checkbox" type="checkbox" checked="checked" />Remeber Me</label>
+                        <span class="psw">Forgot <a href="#">password?</a></span>
+                    </div>
+                </div>
+
+                <div class="containers"  style="background-color:#f1f1f1">
+                    <button type="submit" style="float: left; width: 50%;">Login</button>
+                    <button type="button" class="cancelbtn" style="width: 50%; padding: 14px 20px;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section>
+        <div id="register" class="modal">
+            
+            <form class="modal-content animate">
+                <div class="imgcontainer">
+                    <span class="close">&times;</span>
+                </div>
+                <div class="containers">
+                    <input type="text" placeholder="Enter Email" name="email" required>
+
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+
+                    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                    <div class="checkbox">
+                        <label style="color: black;"><input class="checkbox" type="checkbox" checked="checked" />Remeber Me</label>
+                    </div>
+                    <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+                </div>
+                <div class="containers" style="background-color: #f1f1f1;">
+                    <button type="submit" class="signupbtn" style="float: left; width: 50%;">Sign Up</button>
+                    <button type="button" class="cancelbtn" style="width: 50%; padding: 14px 20px;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section style="margin-top: 80px; color: black;">
+        <div class="container">
+            <div class="row text-center">
+                <h1>Help us find the right loan for you!</h1>
+            </div>
+            <div class="row" style="background-color: #EEE; padding: 50px 100px; border-radius: 20px;">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>How much money do you want to borrow?</label>
+                            <input class="form-control" type="text" required />
+                        </div>
+                        <div class="col-md-6">
+                            <label>What will you use the money for?</label>
+                            <select class="form-control">
+                                <option value="">Select One</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>When do you need financing by?</label>
+                            <select class="form-control">
+                                <option value="">Select One</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">Do you have collateral to support the loan?</div>
+                            <label class="radio-inline"><input type="radio" value="yes" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" />No</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input class="form-control btn btn-primary continue" type="button" value="Continue" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="loan-app" id="app-form">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <h2 id="business-header" class="active" style="cursor: pointer;">Business</h2>
+                </div>
+                <div class="col-md-3">
+                    <h2 id="financial-header" style="cursor: pointer;">Financial</h2>
+                </div>
+                <div class="col-md-3">
+                    <h2 id="personal-header" style="cursor: pointer;">Personal</h2>
+                </div>
+                <div class="col-md-3">
+                    <h2 id="complete-header" style="cursor: default;">Complete</h2>
+                </div>
+            </div>
+            <div class="row">
+                <h1 id="business-text" style="font-size: 2em; font-weight: 600;">Tell us about your business...</h1>
+                <h1 id="financial-text" style="font-size: 2em; font-weight: 600; display: none;">Tell us about your finances...</h1>
+                <h1 id="personal-text" style="font-size: 2em; font-weight: 600; display: none;">Tell us about yourself -- Business Owner(s)...</h1>
+                <h1 id="search-head" style="font-size: 2em; font-weight: 600; display: none;">Choose your perfect lender...</h1>
+            </div>
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:25%">Step 1</div>
+            </div>
+            <!-- business information section -->
+            <div id="business-form" class="row" style="background-color: #EEE; padding: 50px 75px; border-radius: 20px;">
+                <form name="businessForm" novalidate>
+                    <div class="col-md-6">
+                        <label for="business-name">Business Name</label><span ng-show="businessForm.businessName.$touched && businessForm.businessName.$error.required" class="error">&nbsp; *required</span>
+                        <input class="form-control" type="text" id="business-name" name="businessName" ng-model="businessName" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="business-address">Business Address</label><span ng-show="businessForm.businessAddress.$touched && businessForm.businessAddress.$error.required" class="error">&nbsp; *required</span>
+                        <input class="form-control" type="text" id="business-address" name="businessAddress" ng-model="businessAddress" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="business-city">City</label><span class="error" ng-show="businessForm.businessCity.$touched && businessForm.businessCity.$error.required">&nbsp; *required</span>
+                        <input class="form-control" type="text" id="business-city" name="businessCity" ng-model="businessCity" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="business-state">State</label><span class="error" ng-show="businessForm.businessState.$touched && businessForm.businessState.$error.required">&nbsp; *required</span>
+                        <select class="form-control" id="business-state" name="businessState" ng-model="businessState" required>
+                            <option value="">Select One</option>
+                            <option value="alabama">Alabama</option>
+                            <option value="alaska">Alaska</option>
+                            <option value="arizona">Arizona</option>
+                            <option value="arkansas">Arkansas</option>
+                            <option value="california">California</option>
+                            <option value="colorado">Colorado</option>
+                            <option value="connecticut">Connecticut</option>
+                            <option value="delaware">Delaware</option>
+                            <option value="florida">Florida</option>
+                            <option value="georgia">Georgia</option>
+                            <option value="hawaii">Hawaii</option>
+                            <option value="idaho">Idaho</option>
+                            <option value="illinois">Illinois</option>
+                            <option value="indiana">Indiana</option>
+                            <option value="iowa">Iowa</option>
+                            <option value="kansas">Kansas</option>
+                            <option value="kentucky">Kentucky</option>
+                            <option value="louisiana">Louisiana</option>
+                            <option value="maine">Maine</option>
+                            <option value="maryland">Maryland</option>
+                            <option value="massachusetts">Massachusetts</option>
+                            <option value="michigan">Michigan</option>
+                            <option value="minnesota">Minnesota</option>
+                            <option value="mississippi">Mississippi</option>
+                            <option value="missouri">Missouri</option>
+                            <option value="montana">Montana</option>
+                            <option value="nebraska">Nebraska</option>
+                            <option value="nevada">Nevada</option>
+                            <option value="new hampshire">New Hampshire</option>
+                            <option value="new jersey">New Jersey</option>
+                            <option value="new mexico">New Mexico</option>
+                            <option value="new york">New York</option>
+                            <option value="north carolina">North Carolina</option>
+                            <option value="north dakota">North Dakota</option>
+                            <option value="ohio">Ohio</option>
+                            <option value="oklahoma">Oklahoma</option>
+                            <option value="oregon">Oregon</option>
+                            <option value="pennsylvania">Pennsylvania</option>
+                            <option value="rhode island">Rhode Island</option>
+                            <option value="south carolina">South Carolina</option>
+                            <option value="south dakota">South Dakota</option>
+                            <option value="tennessee">Tennessee</option>
+                            <option value="texas">Texas</option>
+                            <option value="utah">Utah</option>
+                            <option value="vermont">Vermont</option>
+                            <option value="virginia">Virginia</option>
+                            <option value="washington">Washington</option>
+                            <option value="west virginia">West Virginia</option>
+                            <option value="wisconsin">Wisconsin</option>
+                            <option value="wyoming">Wyoming</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="business-zip">Zip</label>
+                        <span class="error" ng-show="businessForm.businessZip.$touched && businessForm.businessZip.$error.required">&nbsp; *required</span>
+                        <span class="error" ng-show="businessForm.businessZip.$dirty && businessForm.businessZip.$invalid">&nbsp; *invalid entry</span>
+                        <input class="form-control" type="text" id="business-zip" name="businessZip" ng-model="businessZip" required pattern="[0-9]{5}" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="business-phone">Business Phone</label>
+                        <span class="error" ng-show="businessForm.businessPhone.$touched && businessForm.businessPhone.$error.required">&nbsp; *required</span>
+                        <input id="business-phone" class="form-control" type="text" name="businessPhone" ng-model="businessPhone" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="entity-type">Entity Type</label>
+                        <span class="error" ng-show="businessForm.entityType.$touched && businessForm.entityType.$error.required">&nbsp; *required</span>
+                        <select id="entity-type" class="form-control" type="text" name="entityType" ng-model="entityType" required>
+                            <option value="">Select One</option>
+                            <option value="sole proprietorship">Sole Proprietorship</option>
+                            <option value="corporation/llc">Corporation / LLC</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="non-profit">Non-Profit</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="fein">FEIN</label>
+                        <span class="error" ng-show="businessForm.fein.$touched && businessForm.fein.$error.required">&nbsp; *required</span>
+                        <input class="form-control" type="text" id="fein" name="fein" ng-model="fein" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="business-years">No. Years in Business</label>
+                        <span class="error" ng-show="businessForm.businessYears.$touched && businessForm.businessYears.$error.required">&nbsp; *required</span>
+                        <input id="business-years" class="form-control" type="text" name="businessYears" ng-model="businessYears" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="owners">No. Business Owners</label>
+                        <span class="error" ng-show="businessForm.owners.$touched && businessForm.owners.$error.required">&nbsp; *required</span>
+                        <input id="owners" class="form-control" type="text" name="owners" ng-model="numberOfOwners" ng-blur="showOwners()" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="employees">No. Employees</label>
+                        <span class="error" ng-show="businessForm.employees.$touched && businessForm.employees.$error.required">&nbsp; *required</span>
+                        <input id="employees" class="form-control" type="text" name="employees" ng-model="employees" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="industry">Industry</label>
+                        <span class="error" ng-show="businessForm.industry.$touched && businessForm.industry.$error.required">&nbsp; *required</span>
+                        <select class="form-control" id="industry" name="industry" ng-model="industry" required>
+                            <option value="">Select One</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="product-service">Primary Product or Service</label>
+                        <span class="error" ng-show="businessForm.productOrService.$touched && businessForm.productOrService.$error.required">&nbsp; *required</span>
+                        <input id="product-service" class="form-control" type="text" name="productOrService" ng-model="productOrService" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="additional-credit">Additional Business Credit</label>
+                        <span class="error" ng-show="businessForm.additionalCredit.$touched && businessForm.additionalCredit.$error.required">&nbsp; *required</span>
+                        <input class="form-control" type="text" id="additional-credit" name="additionalCredit" ng-model="additionalCredit" required />
+                    </div>
+                    <div class="col-md-2">
+                        <input class="form-control btn btn-primary next" type="button" value="Next" />
+                    </div>
+                </form>
+            </div>
+            <!-- financial information section -->
+            <div id="financial-form" class="row" style="background-color: #EEE; padding: 50px 75px; border-radius: 20px; display: none;">
+                <form name="financialForm" novalidate>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span style="font-size: 14px; font-weight: 900;">Enter business revenue for</span><br /><span style="font-size: 14px; font-weight: 900;">this year &amp; last</span>
+                        </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" type="text" name="lastYearRevenue" placeholder="Last Year" ng-model="lastYearRevenue" required />
+                                </div>
+                                <div class="col-md-4">
+                                    <input class="form-control" type="text" name="thisYearRevenue" placeholder="This Year" ng-model="thisYearRevenue" required />
+                                </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span style="font-size: 14px; font-weight: 900;">Is this business profitable?</span><br />
+                            <label class="radio-inline"><input type="radio" value="yes" ng-model="profitable" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" ng-model="profitable" />No</label>
+                        </div>
+                        <div class="col-md-4">
+                            <span class="error" ng-show="financialForm.lastYearProfit.$touched && fiancialForm.lastYearProfit.$error.required">*required</span>
+                            <input class="form-control" type="text" name="lastYearProfit" ng-model="lastYearProfit" placeholder="Last Year" ng-show="profitable == 'yes'" required />
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="thisYearProfit" placeholder="This Year" ng-show="profitable == 'yes'" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span style="font-size: 14px; font-weight: 900;">Does this business have accounts receivable?</span><br />
+                            <label class="radio-inline"><input type="radio" value="yes" ng-model="accountsReceivable" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" ng-model="accountsReceivable" />No</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="avgBalance" placeholder="Est Avg Balance" ng-show="accountsReceivable == 'yes'" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span style="font-size: 14px; font-weight: 900;">Does this business have any unpaid liens or judgments?</span><br />
+                            <label class="radio-inline"><input type="radio" value="yes" ng-model="leansOrJudgments" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" ng-model="leansOrJudgments" />No</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="leansOrJudgmentsFromWho" placeholder="From Whom" ng-show="leansOrJudgments == 'yes'" />
+                        </div>
+                    </div>
+                    <div class="row" ng-show="leansOrJudgments == 'yes'">
+                        <div class="col-md-4">
+                            <span style="font-size: 14px; font-weight: 900;">Does this business have a payment agreement for the liens or judgments?</span><br />
+                            <label class="radio-inline"><input type="radio" value="yes" ng-model="leansOrJudgmentsPaymentAgreement" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" ng-model="leansOrJudgmentsPaymentAgreement" />No</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="leansOrJudgmentsMonthlyPayment" ng-show="leansOrJudgmentsPaymentAgreement == 'yes'" placeholder="Monthly Payment" required />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <span style="font-size: 14px; font-weight: 900;">Does this business have any loans, leases or credit cards with monthly payments?</span><br />
+                            <label class="radio-inline"><input type="radio" value="yes" ng-model="loanMonthlyPayments" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" ng-model="loanMonthlyPayments" />No</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="loanMonthlyPayment" placeholder="Monthly Payment" ng-show="loanMonthlyPayments == 'yes'" />
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <input id="prev" class="form-control btn btn-primary prev" type="button" value="Prev" />
+                    </div>
+                    <div class="col-md-2">
+                        <input class="form-control btn btn-primary next" type="button" value="Next" />
+                    </div>
+                </form>
+            </div>
+            <!-- personal information section -->
+            <div class="row personal-form" style="background-color: #EEE; margin-top: 15px; padding: 25px 75px; border-radius: 20px; display: none;" ng-repeat="owner in businessOwners">
+                <h3 class="text-center">Business Owner #{{ $index + 1 }}</h3><br />
+                <form name="personalForm">
+                    <div class="col-md-5">
+                        <label for="firstName">First Name</label>
+                        <span class="error" ng-show="personalForm.firstName.$touched && personalForm.firstName.$error.required">&nbsp; *required</span>
+                        <input class="form-control" type="text" id="firstName" name="firstName" ng-model="owner.firstName" required />
+                    </div>
+                    <div class="col-md-5">
+                        <label for="lastName">Last Name</label>
+                        <input class="form-control" type="text" id="lastName" ng-model="owner.lastName" />
+                    </div>
+                    <div class="col-md-2">
+                        <label for="percentOwned">% Owned</label>
+                        <input class="form-control" type="text" id="percentOwned" ng-model="owner.percentOwned" />
+                    </div>
+                    <div class="col-md-8">
+                        <label for="address">Address</label>
+                        <input class="form-control" type="text" id="address" ng-model="owner.address" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="apt-no">Apt No.</label>
+                        <input class="form-control" type="text" id="apt-no" ng-model="owner.aptNo" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="city">City</label>
+                        <input class="form-control" type="text" id="city" ng-model="owner.city" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="state">State</label>
+                        <select class="form-control" id="state" ng-model="owner.state">
+                            <option value="">Select One</option>
+                            <option value="alabama">Alabama</option>
+                            <option value="alaska">Alaska</option>
+                            <option value="arizona">Arizona</option>
+                            <option value="arkansas">Arkansas</option>
+                            <option value="california">California</option>
+                            <option value="colorado">Colorado</option>
+                            <option value="connecticut">Connecticut</option>
+                            <option value="delaware">Delaware</option>
+                            <option value="florida">Florida</option>
+                            <option value="georgia">Georgia</option>
+                            <option value="hawaii">Hawaii</option>
+                            <option value="idaho">Idaho</option>
+                            <option value="illinois">Illinois</option>
+                            <option value="indiana">Indiana</option>
+                            <option value="iowa">Iowa</option>
+                            <option value="kansas">Kansas</option>
+                            <option value="kentucky">Kentucky</option>
+                            <option value="louisiana">Louisiana</option>
+                            <option value="maine">Maine</option>
+                            <option value="maryland">Maryland</option>
+                            <option value="massachusetts">Massachusetts</option>
+                            <option value="michigan">Michigan</option>
+                            <option value="minnesota">Minnesota</option>
+                            <option value="mississippi">Mississippi</option>
+                            <option value="missouri">Missouri</option>
+                            <option value="montana">Montana</option>
+                            <option value="nebraska">Nebraska</option>
+                            <option value="nevada">Nevada</option>
+                            <option value="new hampshire">New Hampshire</option>
+                            <option value="new jersey">New Jersey</option>
+                            <option value="new mexico">New Mexico</option>
+                            <option value="new york">New York</option>
+                            <option value="north carolina">North Carolina</option>
+                            <option value="north dakota">North Dakota</option>
+                            <option value="ohio">Ohio</option>
+                            <option value="oklahoma">Oklahoma</option>
+                            <option value="oregon">Oregon</option>
+                            <option value="pennsylvania">Pennsylvania</option>
+                            <option value="rhode island">Rhode Island</option>
+                            <option value="south carolina">South Carolina</option>
+                            <option value="south dakota">South Dakota</option>
+                            <option value="tennessee">Tennessee</option>
+                            <option value="texas">Texas</option>
+                            <option value="utah">Utah</option>
+                            <option value="vermont">Vermont</option>
+                            <option value="virginia">Virginia</option>
+                            <option value="washington">Washington</option>
+                            <option value="west virginia">West Virginia</option>
+                            <option value="wisconsin">Wisconsin</option>
+                            <option value="wyoming">Wyoming</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="zip">Zip</label>
+                        <input class="form-control" type="text" id="zip" ng-model="owner.zip" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="email">Email</label>
+                        <span></span>
+                        <input class="form-control" type="text" id="email" name="email" ng-model="owner.email" />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="confirm-email">Confirm Email</label>
+                        <span class="error" ng-show="personalForm.email.$dirty && personalForm.confirmEmail.$dirty && owner.email != owner.confirmEmail">&nbsp; *does not match original</span>
+                        <input class="form-control" type="text" id="confirm-email" name="confirmEmail" ng-model="owner.confirmEmail" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="phone">Phone</label>
+                        <input class="form-control" type="text" id="phone" ng-model="owner.phone" />
+                    </div>
+                    <div class="col-md-4">
+                        <label>Personal Credit Score</label>
+                        <select class="form-control" ng-model="owner.creditScore">
+                            <option value="">Select One</option>
+                            <option value="excellent">> 720</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="incomeOutsideBusiness">Income earned outside of business</label>
+                        <input class="form-control" type="text" id="incomeOutsideBusiness" ng-model="owner.incomeOutsideBusiness" placeholder="Enter Monthly Amount"/>
+                    </div>
+                    <div class="col-md-12">
+                        <label>Est. Monthly Living Cost (provide all that apply)</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control" type="text" placeholder="Household (Rent / Mortgage)" ng-model="owner.houseHoldCost" />
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control" type="text" placeholder="Auto payments &amp; Insurance" ng-model="owner.transportationCost" />
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control" type="text" placeholder="Child Care &amp; Alamony" ng-model="owner.childCareCost" />
+                    </div>
+                    <div class="col-md-3">
+                        <input class="form-control" type="text" placeholder="Health Care" ng-model="owner.healthCareCost" />
+                    </div>
+                    <div class="row" style="padding: 15px;">
+                        <div class="col-md-5">
+                            <span style="font-size: 14px; font-weight: 900;">Any unpaid liens, judgments or bankruptcies in the past 5 years?</span><br />
+                            <label class="radio-inline"><input type="radio" value="yes" ng-model="owner.leansJudgmentsBankruptcies" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" ng-model="owner.leansJudgmentsBankruptcies" />No</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="owner.leansJudgmentsBankruptciesFromWho" placeholder="From Whom" ng-show="owner.leansJudgmentsBankruptcies == 'yes'" />
+                        </div>
+                    </div>
+                    <div ng-show="owner.leansJudgmentsBankruptcies == 'yes'" class="row" style="padding: 15px;">
+                        <div class="col-md-5">
+                            <span style="font-size: 14px; font-weight: 900;">Do you have a payment agreement for the liens or judgments?</span><br />
+                            <label class="radio-inline"><input type="radio" value="yes" ng-model="owner.leansJudgmentsBankruptciesPaymentAgreement" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" ng-model="owner.leansJudgmentsBankruptciesPaymentAgreement" />No</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" ng-model="owner.leansJudgmentsBankruptciesMonthlyPayment" ng-show="owner.leansJudgmentsBankruptciesPaymentAgreement == 'yes'" placeholder="Monthly Payment" required />
+                            <p ng-show="owner.leansJudgmentsBankruptciesPaymentAgreement == 'yes'">* Be prepared to provide copy</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="appSubmit" style="display: none;">
+                <div class="col-md-2">
+                    <input class="form-control btn btn-primary prev" type="button" value="Prev" />
+                </div>
+                <div class="col-md-2">
+                    <input id="submit" class="form-control btn btn-primary" type="button" value="Submit" />
+                </div>
+            </div>
+            <!-- prequalification results -->
+            <div id="search-results" class="row" style="display: none;">
+                <div class="col-md-8">
+
+                    <h1 class="text-primary">Your Matches</h1>
+                    <div class="lender">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <figure class="figure">
+                                    <img src="images/placeholder.gif" class="img-responsive figure-img" />
+                                    <figcaption class="figure-caption text-center">Lender Name</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="col-sm-6">
+                                    <p>Microloan</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>$10,000 - $50,000</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>3 - 5 years</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Fixed rate loan from %7.0 to %9.0</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>$400 monthly</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Deposit within a week</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Loan Fees: </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a class="btn btn-primary text-center pull-left" href="apply.html">Contact Lender</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lender">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <figure class="figure">
+                                    <img src="images/placeholder.gif" class="img-responsive figure-img" />
+                                    <figcaption class="figure-caption text-center">Lender Name</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="col-sm-6">
+                                    <p>Microloan</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>$10,000 - $50,000</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>3 - 5 years</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Fixed rate loan from %7.0 to %9.0</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>$400 monthly</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Deposit within a week</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Loan Fees: </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a class="btn btn-primary text-center pull-left" href="apply.html">Contact Lender</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lender">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <figure class="figure">
+                                    <img src="images/placeholder.gif" class="img-responsive figure-img" />
+                                    <figcaption class="figure-caption text-center">Lender Name</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="col-sm-6">
+                                    <p>Microloan</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>$10,000 - $50,000</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>3 - 5 years</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Fixed rate loan from %7.0 to %9.0</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>$400 monthly</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Deposit within a week</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Loan Fees: </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a class="btn btn-primary text-center pull-left" href="apply.html">Contact Lender</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lender">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <figure class="figure">
+                                    <img src="images/placeholder.gif" class="img-responsive figure-img" />
+                                    <figcaption class="figure-caption text-center">Lender Name</figcaption>
+                                </figure>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="col-sm-6">
+                                    <p>Microloan</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>$10,000 - $50,000</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>3 - 5 years</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Fixed rate loan from %7.0 to %9.0</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>$400 monthly</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Deposit within a week</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>Loan Fees: </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <a class="btn btn-primary text-center pull-left" href="apply.html">Contact Lender</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <br>
+                    <div class="skill">
+                        <h2 class="page-header">Placeholder</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                        <!-- <div class="progress-wrap">
+                            <h3>Placeholder</h3>
+                            <div class="progress">
+                                <div class="progress-bar  color2" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 85%">
+                                <span class="bar-width">Good</span>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="progress-wrap">
+                            <h4>Placeholder</h4>
+                            <div class="progress">
+                                <div class="progress-bar color2" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 95%">
+                                <span class="bar-width">Good</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-wrap">
+                            <h4>Placeholder</h4>
+                            <div class="progress">
+                                <div class="progress-bar color3" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <span class="bar-width">Okay</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="progress-wrap">
+                            <h4>Placeholder</h4>
+                            <div class="progress">
+                                <div class="progress-bar color4" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                <span class="bar-width">Low</span>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+		<div class="footer">
+			<div class="container">
+				<div class="row text-center" id="footerLinks">
+						<div class="col-md-2 col-md-offset-2">
+							<h4 class="page-header">MyBizCredit</h4>
+							<a href="index.html"><strong>Home</strong></a><br>
+							<a href="learnAboutCredit.html"><strong>Learn About Credit</strong></a><br>
+							<a href="findRightCredit.html"><strong>Find the Right Credit</strong></a><br>
+							<a href="contact.html"><strong>Contact</strong></a><br>
+							<a href="apply.html"><strong>Apply Now</strong></a><br>
+						</div>
+						<div class="col-md-2 col-md-offset-1">
+							<h4 class="page-header">Location</h4>
+							<h5><span class="fa fa-map-marker"></span> 12345 Business Ln</h5>
+							<h5>Suite #101</h5>
+							<h5>Los Angeles, CA 90210</h5>
+							
+						</div>
+						<div class="col-md-2 col-md-offset-1">
+							<h4 class="page-header">Contact</h4>
+							<h5><span class="fa fa-phone-square"></span> (888) 888-8888</h5>
+							<h5><span class="fa fa-envelope"></span> someone@mail.com</h5>
+						</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="social-icon">
+					<div class="col-md-6">
+						<ul class="social-network">
+							<li><a href="#" class="fb tool-tip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#" class="twitter tool-tip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#" class="gplus tool-tip" title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#" class="linkedin tool-tip" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+							<li><a href="#" class="ytube tool-tip" title="You Tube"><i class="fa fa-youtube-play"></i></a></li>
+						</ul>	
+					</div>
+				</div>
+				
+				<div class="col-md-4 col-md-offset-2">
+					<div class="copyright">
+						&copy; All Rights Reserved.
+                        
+					</div>
+				</div>						
+			</div>
+			
+			
+			<div class="pull-right">
+				<a href="#home" class="scrollup"><i class="fa fa-angle-up fa-3x"></i></a>
+			</div>		
+		</div>
+	</footer>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/functions.js"></script>
+
+</body>
+</html>

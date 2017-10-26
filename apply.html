@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" ng-app="loanApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MyBizCredit Application</title>
+    <!-- jQuery -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/apply.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/font-awesome.min.css"> -->
+    <link href="css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/application-style.css" />
+</head>
+<body ng-controller="ApplicationController">
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <div class="navbar-brand">
+                            <a href="index.html"><h1>My<span>Biz</span>Credit</h1></a>
+                        </div>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <div class="menu">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation"><a href="index.html">Home</a></li>
+                                <li role="presentation"><a href="services.html">Learn About Credit</a></li>
+                                <li role="presentation"><a href="prequalify.html">Pre-Qualify</a></li>
+                                <li role="presentation"><a href="apply.html" class="active">Apply</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="loan-app" style="margin-top: 50px; padding: 100px; color: black;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center">
+                    <h1>Final Application</h1>
+                </div>
+                <div class="col-md-4 text-center" style="position: relative; top: 30px;">
+                    <span style="font-size: 1.6em;">Page <span id="show-page1" class="active">1</span> <span id="show-page2" style="cursor: pointer;">2</span> <span id="show-page3" style="cursor: pointer;">3</span></span>
+                </div>
+            </div>
+
+            <!-- page 1 -->
+            <div id="page1" class="row" style="background-color: #EEE; padding: 50px 75px; border-radius: 20px;">
+                <form>
+                    <fieldset>
+                        <legend>Loan Request Info</legend>
+                        <div class="col-md-6">
+                            <label for="requested-loan-amount">Requested Loan Amount</label>
+                            <input class="form-control" type="text" id="requested-loan-amount" name="requestedLoanAmount" ng-model="requestedLoanAmount" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="loan-purpose">Purpose of Loan</label>
+                            <textarea class="form-control" id="loan-purpose" name="loanPurpose" ng-model="loanPurpose"></textarea>
+                        </div>
+                        <!-- next two inputs for however many loan uses -->
+                        <div class="col-md-6">
+                            <label>Specific Loan Use</label>
+                            <select class="form-control" name="loanUse" ng-model="loanUse">
+                                <option value="">Select One</option>
+                                <option value="advertising/marketing">Advertising/Marketing</option>
+                                <option value="business acquisition">Business Acquisition</option>
+                                <option value="commercial vehicles">Commercial Vehicles</option>
+                                <option value="debt refinance">Debt Refinance</option>
+                                <option value="franchise fees/deposits">Franchise Fees/Deposits</option>
+                                <option value="furniture">Furniture &amp; Fixtures</option>
+                                <option value="inventory">Inventory</option>
+                                <option value="lease deposit">Lease Deposit</option>
+                                <option value="leasehold improvements">Leasehold Improvements</option>
+                                <option value="liquor license">Liquor License</option>
+                                <option value="machinery &amp; equiptment">Machinery &amp; Equipment</option>
+                                <option value="miscellaneous fees">Miscellaneous Fees</option>
+                                <option value="new construction">New Construction</option>
+                                <option value="other working capital">Other Working Capital</option>
+                                <option value="payroll">Payroll</option>
+                                <option value="real estate purchase">Real Estate Purchase</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="loan-use-amount">Amount</label>
+                            <input class="form-control" type="text" id="loan-use-amount" name="loanUseAmount" ng-model="loanUseAmount" />
+                        </div>
+                        <div class="col-md-12 text-right">
+                            <span style="cursor: pointer;">Add another loan use</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">Do you have a business plan? (only if expansion or startup)</div>
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="businessPlan" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="businessPlan" />No</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">In addition to the loan, have you or will you be contributing your own cash to this project?</div>
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="ownCashContributed" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="ownCashContributed" />No</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div ng-show="ownCashContributed == 'yes'">
+                                    <label for="own-cash-amount">How Much</label>
+                                    <input class="form-control" type="text" id="own-cash-amount" name="ownCashAmount" ng-model="ownCashAmount" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">Are you raising cash from any other sources?</div>
+                            <label class="radio-inline"><input type="radio" value="yes" ng-model="otherFundsRaised" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" ng-model="otherFundsRaised" />No</label>
+                        </div>
+                        <div class="row">
+                            <div ng-show="otherFundsRaised == 'yes'">
+                                <fieldset style="margin-top: 50px;">
+                                    <legend style=" font-size: 1.4em; font-weight: 500;">Detailed Sources of Funds</legend>
+                                    <div class="col-md-4">
+                                        <label>Other Funding Source</label>
+                                        <select class="form-control" name="otherFundingSource" ng-model="otherFundingSource">
+                                            <option value="">Select One</option>
+                                            <option value="bank loan">Bank Loan</option>
+                                            <option value="seller note">Seller Note</option>
+                                            <option value="cash from investors">Cash From Investors</option>
+                                            <option value="landlord allowance">Landlord Allowance</option>
+                                            <option value="other financing">Other Financing</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="other-funds-amount">Amount</label>
+                                        <input class="form-control" type="text" id="other-funds-amount" name="otherFundsAmount" ng-model="otherFundsAmount" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div ng-show="otherFundingSource == 'other financing'">
+                                            <label for="other-financing">Describe Other Financing</label>
+                                            <input class="form-control" type="text" id="other-financing" name="otherFinancing" ng-model="otherFinancing" />
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Business Info</legend>
+                        <div class="col-md-6">
+                            <label for="business-name">Business Name</label>
+                            <input class="form-control" type="text" id="business-name" name="businessName" ng-model="businessName" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="business-address">Business Address</label>
+                            <input class="form-control" type="text" id="business-address" name="businessAddress" ng-model="businessAddress" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="business-city">Business City</label>
+                            <input class="form-control" type="text" id="business-city" name="businessCity" ng-model="businessCity" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="business-state">Business State</label>
+                            <input class="form-control" type="text" id="business-state" name="businessState" ng-model="businessState" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="business-zip">Business Zip</label>
+                            <input class="form-control" type="text" id="business-zip" name="businessZip" ng-model="businessZip" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="web-address">Web Address</label>
+                            <input class="form-control" type="text" id="web-address" name="businessWebsite" ng-model="businessWebsite" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="business-phone">Business Phone</label>
+                            <input class="form-control" type="text" id="business-phone" name="businessPhone" ng-model="businessPhone" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="business-years">No. Years in Business</label>
+                            <input class="form-control" type="text" id="business-years" name="businessYears" ng-model="businessYears" />
+                        </div>
+                        <div class="col-md-4">
+                            <label>State Incorporated</label>
+                            <select class="form-control" id="state-incorporated" name="stateIncorporated" ng-model="stateIncorporated">
+                                <option value="">Select One</option>
+                                <option value="alabama">Alabama</option>
+                                <option value="alaska">Alaska</option>
+                                <option value="arizona">Arizona</option>
+                                <option value="arkansas">Arkansas</option>
+                                <option value="california">California</option>
+                                <option value="colorado">Colorado</option>
+                                <option value="connecticut">Connecticut</option>
+                                <option value="delaware">Delaware</option>
+                                <option value="florida">Florida</option>
+                                <option value="georgia">Georgia</option>
+                                <option value="hawaii">Hawaii</option>
+                                <option value="idaho">Idaho</option>
+                                <option value="illinois">Illinois</option>
+                                <option value="indiana">Indiana</option>
+                                <option value="iowa">Iowa</option>
+                                <option value="kansas">Kansas</option>
+                                <option value="kentucky">Kentucky</option>
+                                <option value="louisiana">Louisiana</option>
+                                <option value="maine">Maine</option>
+                                <option value="maryland">Maryland</option>
+                                <option value="massachusetts">Massachusetts</option>
+                                <option value="michigan">Michigan</option>
+                                <option value="minnesota">Minnesota</option>
+                                <option value="mississippi">Mississippi</option>
+                                <option value="missouri">Missouri</option>
+                                <option value="montana">Montana</option>
+                                <option value="nebraska">Nebraska</option>
+                                <option value="nevada">Nevada</option>
+                                <option value="new hampshire">New Hampshire</option>
+                                <option value="new jersey">New Jersey</option>
+                                <option value="new mexico">New Mexico</option>
+                                <option value="new york">New York</option>
+                                <option value="north carolina">North Carolina</option>
+                                <option value="north dakota">North Dakota</option>
+                                <option value="ohio">Ohio</option>
+                                <option value="oklahoma">Oklahoma</option>
+                                <option value="oregon">Oregon</option>
+                                <option value="pennsylvania">Pennsylvania</option>
+                                <option value="rhode island">Rhode Island</option>
+                                <option value="south carolina">South Carolina</option>
+                                <option value="south dakota">South Dakota</option>
+                                <option value="tennessee">Tennessee</option>
+                                <option value="texas">Texas</option>
+                                <option value="utah">Utah</option>
+                                <option value="vermont">Vermont</option>
+                                <option value="virginia">Virginia</option>
+                                <option value="washington">Washington</option>
+                                <option value="west virginia">West Virginia</option>
+                                <option value="wisconsin">Wisconsin</option>
+                                <option value="wyoming">Wyoming</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="entity-type">Entity Type</label>
+                            <select class="form-control" name="entityType" ng-model="entityType">
+                                <option value="">Select One</option>
+                                <option value="llc">LLC</option>
+                                <option value="s-corporation">S-Corporation</option>
+                                <option value="c-corporation">C-Corporation</option>
+                                <option value="partnership">Partnership</option>
+                                <option value="sole proprietorship">Sole Proprietorship</option>
+                                <option value="non-profit">Non-Profit Corporation</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="industry">Industry</label>
+                            <select class="form-control" name="industry" ng-model="industry">
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label for="ft-employees">Full-Time Employees</label>
+                            <input class="form-control" type="text" id="ft-employees" name="ftEmployees" ng-model="ftEmployees" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="pt-employees">Part-Time Employees</label>
+                            <input class="form-control" type="text" id="pt-employees" name="ptEmployees" ng-model="ptEmployees" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="ft-new-hires">Full-Time New Hires</label>
+                            <input class="form-control" type="text" id="ft-new-hires" name="ftNewHires" ng-model="ftNewHires" />
+                        </div>
+                        <div class="col-md-3">
+                            <label for="pt-new-hires">Part-Time New Hires</label>
+                            <input class="form-control" type="text" id="pt-new-hires" name="ptNewHires" ng-model="ptNewHires" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">Does this business have accounts receivable?</div>
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="accountsReceivable" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="accountsReceivable" />No</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label ng-show="accountsReceivable == 'yes'">Payment Terms</label>
+                                <select class="form-control" ng-model="paymentTerms" ng-show="accountsReceivable == 'yes'">
+                                    <option value="">Select One</option>
+                                    <option value="29">Less than 30 days</option>
+                                    <option value="30">30 days</option>
+                                    <option value="45">45 days</option>
+                                    <option value="60">60 days</option>
+                                    <option value="61">More than 60 days</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Detail of Existing Debt</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">Does this business have any existing debt?</div>
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="businessExistingDebt" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="businessExistingDebt" />No</label>
+                            </div>
+                            
+                        </div>
+                        <div ng-show="businessExistingDebt == 'yes'">
+                            <div class="col-md-6">
+                                <label for="lender-name">Lender Name</label>
+                                <input class="form-control" type="text" id="lender-name" name="businessLenderName" ng-model="businessLenderName" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="loan-type">Loan Type</label>
+                                <select class="form-control" id="loan-type" name="businessLoanType" ng-model="businessLoanType">
+                                    <option value="">Select One</option>
+                                    <option value="term loan">Term Loan</option>
+                                    <option value="credit line">Credit Line</option>
+                                    <option value="factoring line">Factoring Line</option>
+                                    <option value="cash advance">Cash Advance</option>
+                                    <option value="commercial mortgage">Commercial Mortgage</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="loan-balance">Loan Balance</label>
+                                <input class="form-control" type="text" id="loan-balance" name="businessLoanBalance" ng-model="businessLoanBalance" />
+                            </div>
+                            <div class="col-md-4">
+                                <label for="payment-frequency">Frequency of Payment</label>
+                                <select class="form-control" id="payment-frequency" name="paymentFrequency" ng-model="paymentFrequency">
+                                    <option value="">Select One</option>
+                                    <option value="monthly">Monthly</option>
+                                    <option value="bi-weekly">Bi-Weekly</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="daily">Daily</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="payment-amount">Payment Amount</label>
+                                <input class="form-control" type="text" id="payment-amount" name="paymentAmount" ng-model="paymentAmount" />
+                            </div>
+                            <div class="col-md-12">
+                                <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">Pay Off Requested</div>
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="payoffRequested" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="payoffRequested" />No</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Personal Info</legend>
+                        <div class="col-md-6">
+                            <label for="first-name">First Name</label>
+                            <input class="form-control" type="text" id="first-name" name="firstName" ng-model="firstName" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="last-name">Last Name</label>
+                            <input class="form-control" type="text" id="last-name" name="lastName" ng-model="lastName" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="title">Title</label>
+                            <input class="form-control" type="text" id="tilte" name="title" ng-model="title" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="email">Contact Email</label>
+                            <input class="form-control" type="text" id="email" name="email" ng-model="email" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="confirm-email">Confirm Email</label>
+                            <input class="form-control" type="text" id="confirm-email" name="confirmEmail" ng-model="confirmEmail" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="phone">Phone</label>
+                            <input class="form-control" type="text" id="phone" name="phone" ng-model="phone" />
+                        </div>
+                        <div class="col-md-6">
+                            <label for="address">Address</label>
+                            <input class="form-control" type="text" id="address" name="address" ng-model="address" />
+                        </div>
+                        <div class="col-md-2">
+                            <label for="apt-no">Apt No.</label>
+                            <input class="form-control" type="text" id="apt-no" name="aptNo" ng-model="aptNo" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="city">City</label>
+                            <input class="form-control" type="text" id="city" name="city" ng-model="city" />
+                        </div>
+                        <div class="col-md-4">
+                            <label>State</label>
+                            <select class="form-control" id="state" name="state" ng-model="state">
+                                <option value="">Select One</option>
+                                <option value="alabama">Alabama</option>
+                                <option value="alaska">Alaska</option>
+                                <option value="arizona">Arizona</option>
+                                <option value="arkansas">Arkansas</option>
+                                <option value="california">California</option>
+                                <option value="colorado">Colorado</option>
+                                <option value="connecticut">Connecticut</option>
+                                <option value="delaware">Delaware</option>
+                                <option value="florida">Florida</option>
+                                <option value="georgia">Georgia</option>
+                                <option value="hawaii">Hawaii</option>
+                                <option value="idaho">Idaho</option>
+                                <option value="illinois">Illinois</option>
+                                <option value="indiana">Indiana</option>
+                                <option value="iowa">Iowa</option>
+                                <option value="kansas">Kansas</option>
+                                <option value="kentucky">Kentucky</option>
+                                <option value="louisiana">Louisiana</option>
+                                <option value="maine">Maine</option>
+                                <option value="maryland">Maryland</option>
+                                <option value="massachusetts">Massachusetts</option>
+                                <option value="michigan">Michigan</option>
+                                <option value="minnesota">Minnesota</option>
+                                <option value="mississippi">Mississippi</option>
+                                <option value="missouri">Missouri</option>
+                                <option value="montana">Montana</option>
+                                <option value="nebraska">Nebraska</option>
+                                <option value="nevada">Nevada</option>
+                                <option value="new hampshire">New Hampshire</option>
+                                <option value="new jersey">New Jersey</option>
+                                <option value="new mexico">New Mexico</option>
+                                <option value="new york">New York</option>
+                                <option value="north carolina">North Carolina</option>
+                                <option value="north dakota">North Dakota</option>
+                                <option value="ohio">Ohio</option>
+                                <option value="oklahoma">Oklahoma</option>
+                                <option value="oregon">Oregon</option>
+                                <option value="pennsylvania">Pennsylvania</option>
+                                <option value="rhode island">Rhode Island</option>
+                                <option value="south carolina">South Carolina</option>
+                                <option value="south dakota">South Dakota</option>
+                                <option value="tennessee">Tennessee</option>
+                                <option value="texas">Texas</option>
+                                <option value="utah">Utah</option>
+                                <option value="vermont">Vermont</option>
+                                <option value="virginia">Virginia</option>
+                                <option value="washington">Washington</option>
+                                <option value="west virginia">West Virginia</option>
+                                <option value="wisconsin">Wisconsin</option>
+                                <option value="wyoming">Wyoming</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="zip">Zip</label>
+                            <input class="form-control" type="text" id="zip" name="zip" ng-model="zip" />
+                        </div>
+                        <div class="col-md-4">
+                            <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">Own or Rent</div>
+                            <label class="radio-inline"><input type="radio" value="own" ng-model="ownOrRent" />Own</label>
+                            <label class="radio-inline"><input type="radio" value="rent" ng-model="ownOrRent" />Rent</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="dob">Date of Birth</label>
+                            <input class="form-control" type="text" id="dob" name="dateOfBirth" ng-model="dateOfBirth" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="ssn">SSN</label>
+                            <input class="form-control" type="text" id="ssn" name="ssn" ng-model="ssn" />
+                        </div>
+                        <div class="col-md-4">
+                            <label>Are you a US citizen?</label>
+                            <select class="form-control" id="citizen" name="citizen" ng-model="citizen">
+                                <option value="">Select One</option>
+                                <option value="citizen">Yes, I am a US citizen</option>
+                                <option value="permanent resident">No, I am a permanent resident</option>
+                                <option value="temporary resident">No, I am a temporary resident</option>
+                                <option value="no residency status">No, I do not have a residency status</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">Are you the sole owner of this business?</div>
+                            <label class="radio-inline"><input type="radio" value="yes" ng-model="soleOwner" />Yes</label>
+                            <label class="radio-inline"><input type="radio" value="no" ng-model="soleOwner" />No</label>
+                        </div>
+                        <div ng-show="soleOwner == 'no'">
+                            <div class="col-md-4">
+                                <label for="percent-owned">Ownership %</label>
+                                <input class="form-control" type="text" id="percent-owned" name="percentOwned" ng-model="percentOwned" />
+                            </div>
+                            <fieldset>
+                                <legend style=" font-size: 1.4em; font-weight: 500;">Other Owners</legend>
+                                <div class="col-md-6">
+                                    <label for="firstname">First Name</label>
+                                    <input class="form-control" type="text" id="firstname" name="firstname" ng-model="firstName" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastname">Last Name</label>
+                                    <input class="form-control" type="text" id="lastname" name="firstName" ng-model="lastName" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="title">Title</label>
+                                    <input class="form-control" type="text" id="tile" name="title" ng-model="title" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="percent-owned">Ownership %</label>
+                                    <input class="form-control" type="text" id="percent-owned" name="percentOwned" ng-model="percentOwned" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="phone">Phone</label>
+                                    <input class="form-control" type="text" id="phone" name="phone" ng-model="phone" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" type="text" id="email" name="email" ng-model="email" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="confirm-email">Confirm Email</label>
+                                    <input class="form-control" type="text" id="confirm-email" name="confirmEmail" ng-model="confirmEmail" />
+                                </div>
+                            </fieldset>
+                        </div>
+                    </fieldset>
+                    <div class="col-md-2">
+                        <input class="form-control btn btn-primary next" type="button" value="Next Page" />
+                    </div>
+                </form>
+            </div>
+
+            <!-- page 2 -->
+            <div id="page2" class="row" style="background-color: #EEE; padding: 50px 75px; border-radius: 20px; display: none;">
+                <form>
+                    <fieldset>
+                        <legend>Personal Assets</legend>
+                        <div class="col-md-12">
+                            <label>What type of assests do you own?</label>
+                            <div class="checkbox">
+                                <label class="checkbox-inline"><input type="checkbox" name="cash" ng-model="cash" />Cash</label>&nbsp;&nbsp;&nbsp;
+                                <label class="checkbox-inline"><input type="checkbox" name="lifeInsurancec" ng-model="lifeInsurance" />Life Insurance</label>&nbsp;&nbsp;&nbsp;
+                                <label class="checkbox-inline"><input type="checkbox" name="stocksAndBonds" ng-model="stocksAndBonds" />Stocks and Bonds</label>&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="checkbox">
+                                <label class="checkbox-inline"><input type="checkbox" name="vehicles" ng-model="vehicles" />Vehicles</label>&nbsp;&nbsp;&nbsp;
+                                <label class="checkbox-inline"><input type="checkbox" name="retirementAccounts" ng-model="retirementAccounts" />Retirement Accounts</label>&nbsp;&nbsp;&nbsp;
+                                <label class="checkbox-inline"><input type="checkbox" name="notesReceivable" ng-model="notesReceivable" />Notes Receivable</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" ng-show="cash">
+                                <label for="cash-value">Cash</label>
+                                <input class="form-control" type="text" id="cash-value" name="cashValue" ng-model="cashValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="lifeInsurance">
+                                <label for="life-insurance-value">Life Insurance</label>
+                                <input class="form-control" type="text" id="life-insurance-value" name="lifeInsuranceValue" ng-model="lifeInsuranceValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="stocksAndBonds">
+                                <label for="stocks-and-bonds-value">Stocks and Bonds</label>
+                                <input class="form-control" type="text" id="stocks-and-bonds-value" name="stocksAndBondsValue" ng-model="stocksAndBondsValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="vehicles">
+                                <label for="vehicles-value">Vehicles</label>
+                                <input class="form-control" type="text" id="vehicles-value" name="vehiclesValue" ng-model="vehiclesValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="retirementAccounts">
+                                <label for="retirement-accounts-value">Retirement Accounts</label>
+                                <input class="form-control" type="text" id="retirement-accounts-value" name="retirementAccountsValue" ng-model="retirementAccountsValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="notesReceivable">
+                                <label for="notes-receivable-value">Notes Receivable</label>
+                                <input class="form-control" type="text" id="notes-receivable-value" name="notesReceivableValue" ng-model="notesReceivableValue" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span style="font-size: 14px; font-weight: 900;">Do you own any real estate?</span><br />
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="ownRealEstate" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="ownRealEstate" />No</label>
+                            </div>
+                        </div>
+                        <div ng-show="ownRealEstate == 'yes'">
+                            <fieldset>
+                                <legend style=" font-size: 1.4em; font-weight: 500;">Owned Real Estate</legend>
+                                <div class="col-md-6">
+                                    <label>Property Type</label>
+                                    <select class="form-control" name="propertyType" ng-model="propertyType">
+                                        <option value="">Select One</option>
+                                        <option value="single family">Single Family</option>
+                                        <option value="multi family">Multi Family</option>
+                                        <option value="cooperative">Cooperative</option>
+                                        <option value="condominium">Condominium</option>
+                                        <option value="vacant land">Vacant Land</option>
+                                        <option value="commercial/industrial">Commercial/Industrial</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="property-address">Full Property Address</label>
+                                    <input class="form-control" type="text" id="property-address" name="propertyAddress" ng-model="propertyAddress" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="estimated-value">Estimated Value</label>
+                                    <input class="form-control" type="text" id="estimated-value" name="estimatedValue" ng-model="estimatedValue" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="percent-owned">Owned %</label>
+                                    <input class="form-control" type="text" id="percent-owned" name="percentOwned" ng-model="percentOwned" />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span style="font-size: 14px; font-weight: 900;">Is this property mortgaged?</span><br />
+                                        <label class="radio-inline"><input type="radio" value="yes" ng-model="propertyMortgaged" />Yes</label>
+                                        <label class="radio-inline"><input type="radio" value="no" ng-model="propertyMortgaged" />No</label>
+                                    </div>
+                                </div>
+                                
+                                <div ng-show="propertyMortgaged == 'yes'">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span style="font-size: 14px; font-weight: 900;">Is there a 2nd?</span><br />
+                                            <label class="radio-inline"><input type="radio" value="yes" ng-model="anotherMortgage" />Yes</label>
+                                            <label class="radio-inline"><input type="radio" value="no" ng-model="anotherMortgage" />No</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="mortgage-lender">Mortgage Lender</label>
+                                        <input class="form-control" type="text" id="mortgage-lender" name="mortgageLender" ng-model="mortgageLender" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="loan-balnace">Loan Balance</label>
+                                        <input class="form-control" type="text" id="loan-balance" name="loanBalance" ng-model="loanBalance" />
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="monthly-payment">Monthly Payment</label>
+                                        <input class="form-control" type="text" id="monthly-payment" name="monthlyPayment" ng-model="monthlyPayment" />
+                                    </div>
+                                </div>
+                            </fieldset>
+                            
+                        </div>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <legend>Personal Monthly Income and Expenses</legend>
+                        <div class="col-md-12">
+                            <label>What types of income do you earn?</label>
+                            <div class="checkbox">
+                                <label class="checkbox-inline"><input type="checkbox" name="salariesWagesSelf" ng-model="salariesWagesSelf" />Salaries &amp; Wages-Self</label>&nbsp;&nbsp;&nbsp;
+                                <label class="checkbox-inline"><input type="checkbox" name="salariesWagesSpouse" ng-model="salariesWagesSpouse" />Salaries &amp; Wages-Spouse</label>&nbsp;&nbsp;&nbsp;
+                                <label class="checkbox-inline"><input type="checkbox" name="rentalIncome" ng-model="rentalIncome" />Rental Income</label>&nbsp;&nbsp;&nbsp;
+                                
+                            </div>
+                            <div class="checkbox">
+                                <label class="checkbox-inline"><input type="checkbox" name="investmentIncome" ng-model="investmentIncome" />Investment Income</label>&nbsp;&nbsp;&nbsp;
+                                <label class="checkbox-inline"><input type="checkbox" name="retirementIncome" ng-model="retirementIncome" />Retirement Income</label>&nbsp;&nbsp;&nbsp;
+                                <label class="checkbox-inline"><input type="checkbox" name="otherIncome" ng-model="otherIncome" />Other Income</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4" ng-show="salariesWagesSelf">
+                                <label for="salries-wages-self">Salaries &amp; Wages-Self</label>
+                                <input class="form-control" type="text" id="salaries-wages-self" name="salariesWagesSelfValue" ng-model="salariesWagesSelfValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="salariesWagesSpouse">
+                                <label for="salries-wages-spouse">Salaries &amp; Wages-Spouse</label>
+                                <input class="form-control" type="text" id="salaries-wages-spouse" name="salariesWagesSpouseValue" ng-model="salariesWagesSpouseValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="rentalIncome">
+                                <label for="rental-income">Rental Income</label>
+                                <input class="form-control" type="text" id="rental-income" name="rentalIncomeValue" ng-model="rentalIncomeValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="investmentIncome">
+                                <label for="investment-income">Investment Income</label>
+                                <input class="form-control" type="text" id="investment-income" name="investmentIncomeValue" ng-model="investmentIncomeValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="retirementIncome">
+                                <label for="retirement-income">Retirement Income</label>
+                                <input class="form-control" type="text" id="retirement-income" name="retirementIncomeValue" ng-model="retirementIncomeValue" />
+                            </div>
+                            <div class="col-md-4" ng-show="otherIncome">
+                                <label for="other-income">Other Income</label>
+                                <input class="form-control" type="text" id="other-income" name="otherIncomeValue" ng-model="otherIncomeValue" />
+                            </div>
+                        </div>
+                        
+                        <fieldset>
+                            <legend style=" font-size: 1.4em; font-weight: 500;">Monthly Expenses</legend>
+                            <div class="col-md-3">
+                                <label for="utility-expenses">Utility Expenses</label>
+                                <input class="form-control" type="text" id="utility-expenses" name="utilityExpenses" ng-model="utilityExpenses" />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="educational-expenses">Educational Expenses</label>
+                                <input class="form-control" type="text" id="educational-expenses" name="educationalExpenses" ng-model="educationalExpenses" />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="insurance-premiums">Insurance Premiums</label>
+                                <input class="form-control" type="text" id="insurance-premiums" name="insurancePremiums" ng-model="insurancePremiums" />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="medical-expenses">Medical Expenses</label>
+                                <input class="form-control" type="text" id="medical-expenses" name="medicalExpenses" ng-model="medicalExpenses" />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="other-expenses">Other Expenses</label>
+                                <input class="form-control" type="text" id="other-expenses" name="otherExpenses" ng-model="otherExpenses" />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="adults-in-household">Adults in Household</label>
+                                <input class="form-control" type="text" id="adults-in-household" name="adultsInHousehold" ng-model="adultsInHousehold" />
+                            </div>
+                            <div class="col-md-3">
+                                <label for="minors-in-household">Minors in Household</label>
+                                <input class="form-control" type="text" id="minors-in-household" name="minorsInHousehold" ng-model="minorsInHousehold" />
+                            </div>
+                        </fieldset>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Personal Background</legend>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="font-size: 14px; font-weight: 900;">Have you had a bankruptcy, foreclosure, or repossession in the last 36 months?</span><br />
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="bankruptcyForeclosureRepo" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="bankruptcyForeclosureRepo" />No</label>
+                            </div>
+                            <div class="col-md-6">
+                                <span style="font-size: 14px; font-weight: 900;">Have you been a principal or guarantor of a company that declared bankruptcy?</span><br />
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="principalOfBankruptCompany" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="principalOfBankruptCompany" />No</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="font-size: 14px; font-weight: 900;">Are you past due on any child support payments?</span><br />
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="pastDueChildSupport" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="pastDueChildSupport" />No</label>
+                            </div>
+                            <div class="col-md-6">
+                                <span style="font-size: 14px; font-weight: 900;">Are you a party to any legal claims or lawsuits?</span><br />
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="legalClaimsOrLawsuits" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="legalClaimsOrLawsuits" />No</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span style="font-size: 14px; font-weight: 900;">Do you have any past due income taxes?</span><br />
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="pastDueIncomeTaxes" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="pastDueIncomeTaxes" />No</label>
+                            </div>
+                        </div>
+                        <div ng-show="pastDueIncomeTaxes == 'yes'">
+                            <div class="col-md-6">
+                                <label>Tax Type</label>
+                                <select class="form-control" name="pastDueTaxType" ng-model="pastDueTaxType">
+                                    <option value="">Select One</option>
+                                    <option value="irs income taxes">IRS Income Taxes</option>
+                                    <option value="irs payroll taxes">IRS Payroll Taxes</option>
+                                    <option value="state income or payroll taxes">State Income or Payroll Taxes</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="past-due-tax-balance">Tax Balance</label>
+                                <input class="form-control" type="text" id="past-due-tax-balance" name="pastDueTaxBalance" ng-model="pastDueTaxBalance" />
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <span style="font-size: 14px; font-weight: 900;">Are you on a payment plan?</span><br />
+                                    <label class="radio-inline"><input type="radio" value="yes" ng-model="pastDueTaxPaymentPlan" />Yes</label>
+                                    <label class="radio-inline"><input type="radio" value="no" ng-model="pastDueTaxPaymentPlan" />No</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <label for="background-explain">If you answered YES to any of the questions above, please explain</label>
+                            <textarea class="form-control" id="background-explain" name="backgroundExplain" ng-model="backgroundExplain"></textarea>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Demographic Data <span style=" font-size: .8em; font-weight: 500;">(optional)</span></legend>
+                        <div class="col-md-6">
+                            <label>Sex/Gender</label>
+                            <select class="form-control" name="gender" ng-model="gender">
+                                <option value="">Select One</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="decline to state">Decline to State</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Race</label>
+                            <select class="form-control" name="race" ng-model="race">
+                                <option value="">Select One</option>
+                                <option value="white">White (Including Hispanic/Latino)</option>
+                                <option value="american indian">American Indian/Alaskan Native</option>
+                                <option value="hawaiian">Native Hawaiian/Pacific Islander</option>
+                                <option value="african american">African American</option>
+                                <option value="asian">Asian</option>
+                                <option value="other">Other</option>
+                                <option value="decline to state">Decline to State</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Ethnicity</label>
+                            <select class="form-control" name="ethnicity" ng-model="ethnicity">
+                                <option value="">Select One</option>
+                                <option value="hispanic">Hispanic/Latino</option>
+                                <option value="non hispanic">Non Hispanic/Latino</option>
+                                <option value="decline to state">Decline to State</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Are you a US veteran?</label>
+                            <select class="form-control" name="veteran" ng-model="veteran">
+                                <option value="">Select One</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                                <option value="decline to state">Decline to State</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <div class="col-md-2">
+                        <input class="form-control btn btn-primary prev" type="button" value="Prev Page" />
+                    </div>
+                    <div class="col-md-2">
+                        <input class="form-control btn btn-primary next" type="button" value="Next Page" />
+                    </div>
+                </form>
+            </div>
+
+            <!-- page 3 -->
+            <div id="page3" class="row" style="background-color: #EEE; padding: 50px 75px; border-radius: 20px; display: none;">
+                <form>
+                    <fieldset>
+                        <legend>Additional Info</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="font-size: 14px; font-weight: 900; padding-bottom: 10px;">Did you apply for credit elsewhere before coming to My BIZ Credit?</div>
+                                <label class="radio-inline"><input type="radio" value="yes" ng-model="creditElsewhere" />Yes</label>
+                                <label class="radio-inline"><input type="radio" value="no" ng-model="creditElsewhere" />No</label>
+                            </div>
+                        </div>
+
+                        <div ng-show="creditElsewhere == 'yes'">
+                            <div class="col-md-6">
+                                <label for="prev-lenders-name">Name of Lender(s)</label>
+                                <input class="form-control" type="text" id="prev-lenders-name" name="prevLendersName" ng-model="prevLenderName" />
+                            </div>
+                            <div class="col-md-6">
+                                <label>Application Result</label>
+                                <select class="form-control" name="prevAppResult" ng-model="prevAppResult">
+                                    <option value="">Select One</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="approved">Approved</option>
+                                    <option value="denied">Denied</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label>How did you hear about My BIZ Credit</label><!-- Any explanation needed for any? -->
+                            <select class="form-control" name="heardAboutMBC" ng-model="heardAboutMBC">
+                                <option value="">Select One</option>
+                                <option value="print advertisement">Print Advertisement</option>
+                                <option value="bank referral">Bank Referral</option>
+                                <option value="business source center">Business Source Center</option>
+                                <option value="chamber of commerce">Chamber of Commerce</option>
+                                <option value="employee referral">Employee Referral</option>
+                                <option value="existing borrower referral">Existing Borrower Referral</option>
+                                <option value="great streets">Great Streets</option>
+                                <option value="internet search">Internet Search</option>
+                                <option value="loan broker">Loan Broker</option>
+                                <option value="microloan.org">microloan.org</option>
+                                <option value="online advertisement">Online Advertisement</option>
+                                <option value="sbaguides.com">sbaguides.com</option>
+                                <option value="sba office">SBA Office</option>
+                                <option value="sbdc">SBDC</option>
+                                <option value="social media">Social Media</option>
+                                <option value="trade show/networking event">Trade Show/Networking Event</option>
+                                <option value="walk-in">Walk-in</option>
+                                <option value="womens business center">Women's Business Center</option>
+                                <option value="word of mouth">Word of Mouth</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </fieldset>
+                    <div class="col-md-2">
+                        <input class="form-control btn btn-primary prev" type="button" value="Prev Page" />
+                    </div>
+                    <div class="col-md-2">
+                        <input class="form-control btn btn-primary" type="button" value="Submit" />
+                    </div>
+                </form>
+                
+            </div>
+        </div>
+    </section>
+    <footer>
+		<div class="footer">
+			<div class="container">
+				<div class="row text-center" id="footerLinks">
+						<div class="col-md-2 col-md-offset-2">
+							<h4 class="page-header"><strong>MyBizCredit</strong></h4>
+							<a href="index.html"><strong>Home</strong></a><br>
+							<a href="learnAboutCredit.html"><strong>Learn About Credit</strong></a><br>
+							<a href="findRightCredit.html"><strong>Find the Right Credit</strong></a><br>
+							<a href="contact.html"><strong>Contact</strong></a><br>
+							<a href="apply.html"><strong>Apply Now</strong></a><br>
+						</div>
+						<div class="col-md-2 col-md-offset-1">
+							<h4 class="page-header"><strong>Location</strong></h4>
+							<h5><span class="fa fa-map-marker"></span> 12345 Business Ln</h5>
+							<h5>Suite #101</h5>
+							<h5>Los Angeles, CA 90210</h5>
+							
+						</div>
+						<div class="col-md-2 col-md-offset-1">
+							<h4 class="page-header"><strong>Contact</strong></h4>
+							<h5><span class="fa fa-phone-square"></span> (888) 888-8888</h5>
+							<h5><span class="fa fa-envelope"></span> someone@mail.com</h5>
+							<!-- <a href="#"><strong>Home</strong></a><br>
+							<a href="#"><strong>About Us</strong></a><br>
+							<a href="#"><strong>Services</strong></a><br>
+							<a href="#"><strong>Contact</strong></a><br>
+							<a href="#"><strong>Apply Now</strong></a><br> -->
+						</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="social-icon">
+					<div class="col-md-6">
+						<ul class="social-network">
+							<li><a href="#" class="fb tool-tip" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#" class="twitter tool-tip" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#" class="gplus tool-tip" title="Google Plus"><i class="fa fa-google-plus"></i></a></li>
+							<li><a href="#" class="linkedin tool-tip" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+							<li><a href="#" class="ytube tool-tip" title="You Tube"><i class="fa fa-youtube-play"></i></a></li>
+						</ul>	
+					</div>
+				</div>
+				
+				<div class="col-md-4 col-md-offset-2">
+					<div class="copyright">
+						&copy; All Rights Reserved.
+                        
+					</div>
+				</div>						
+			</div>
+			
+			
+			<div class="pull-right">
+				<a href="#home" class="scrollup"><i class="fa fa-angle-up fa-3x"></i></a>
+			</div>		
+		</div>
+	</footer>
+</body>
+</html>

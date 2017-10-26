@@ -1,0 +1,86 @@
+h2.active {
+    font-weight: 800;
+    font-style: italic;
+    color: white;
+    background-color: #4885ed;
+    border-radius: 20px;
+}
+
+#business-header, #financial-header, #personal-header, #complete-header {
+    box-sizing: border-box;
+    font-size: 2em;
+    padding: 5px 0;
+}
+
+    #business-header:hover, #financial-header:hover, #personal-header:hover {
+        border-color: #4885ed;
+        border-radius: 20px;
+    }
+
+.loan-app {
+    margin-top: 80px;
+    padding: 40px 0;
+    color: black;
+    
+}
+
+.progress {
+    height: 30px;
+}
+
+.progress-bar {
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+i:hover {
+    border-radius: 100%;
+}
+
+#financial-form .row {
+    padding-bottom: 15px;
+}
+
+.error {
+    color: red;
+    font-weight: 600;
+}
+
+input.ng-invalid, select.ng-invalid {
+    border: 1px red solid;
+}
+
+
+input.ng-untouched, select.ng-untouched {
+    border: 1px #ccc solid;
+}
+
+fieldset {
+    border: 1px solid #4885ed;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+legend {
+    color: #4885ed;
+    font-size: 1.7em;
+    font-weight: 600;
+    width: auto;
+    margin: 5px;
+    padding: 0 10px;
+}
+
+.row {
+    padding: 15px;
+}
+
+fieldset fieldset {
+    position: relative;
+    top: 10px;
+}
+
+span.active {
+    color: #4885ed;
+    font-weight: 900;
+}

@@ -1,0 +1,17 @@
+{
+ "biz_name": "John Company",
+ "biz_addr": "123 Main Street",
+ "biz_city": "Los Angeles",
+ "biz_state": "CA",
+ "biz_zip": "90043-1619",
+ "biz_ein": "15-3456789", 
+ "biz_years": 5,
+ "biz_revs": 250000,
+ "additional credit": "Bank of America, Text Bank",
+ "own_name": "John Doe",
+ "own_addr": "123 Maple Street",
+ "own_city": "Los Angeles",
+ "own_state": "CA",
+ "own_zip": "90043-1619",
+ "own_ssn": "555-55-5555"
+ }
